@@ -1,12 +1,18 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
+    <!-- <link rel="stylesheet" href="{% static 'src/styles.css' %}"> -->
 </head>
-<body>
-    {% block body %}
-    {% endblock %}
+<body class="h-screen md:max-w-6xl mx-auto bg-gray-50">  
+    <div>
+        {% block body %}
+        {% endblock %}
+        <!-- https://blog.devgenius.io/django-tailwind-setup-made-easy-36043adda97c -->
+    </div>
 </body>
 </html>

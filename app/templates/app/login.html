@@ -2,15 +2,28 @@
 
 {% block body %}
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
+    <div class="grid place-content-center h-screen max-w-sm mx-auto">
+        <div>
+            {% if message %}
+            <div>{{ message }}</div>
+            {% endif %}
+        </div>
 
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="login">
-    </form>
+        <div>
+            <h1 class="bg-purple-600 text-white p-3">Login</h1>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="username" placeholder="Username" class="bg-white w-full p-2 mt-3">
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password" class="bg-white w-full p-2 mt-3">
+                </div>
+                <div>
+                    <input type="submit" value="log in" class="bg-purple-600 p-2 mt-3 text-white">
+                </div>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

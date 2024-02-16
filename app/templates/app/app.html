@@ -2,33 +2,37 @@
 
 {% block body %}
 
-    <h1>Welcome! {{ request.user.first_name }}</h1>
-    <ul>
-        <li>Username: {{ request.user.username }}</li>
-        <li>Email: {{ request.user.email }}</li>
-    </ul>
+    <div class="max-w-6xl mx-auto">
+        <h1>Welcome! {{ request.user.first_name }}</h1>
+        <ul>
+            <li>Username: {{ request.user.username }}</li>
+            <li>Email: {{ request.user.email }}</li>
+        </ul>
 
-    <div>
-        {% for product in products %}
-            <div>
-                <a href="{% url 'product' product.id %}">
-                    {{ product.name }}
-                </a>
-                - <span>{{ product.description }}</span>
-            </div>
-            <div>
-                Price: {{ product.price }}
-            </div>
-            <div>
-                Quantity: {{ product.quantity_available }}
-            </div>
-            <div>
-                Category: {{ product.category.name }}
-            </div>
-            <hr>
-        {% endfor %}
+        <div class="p-3 m-3">
+            {% for product in products %}
+                <div>
+                    <a href="{% url 'product' product.id %}">
+                        {{ product.name }}
+                    </a>
+                    - <span>{{ product.description }}</span>
+                </div>
+                <div>
+                    Price: {{ product.price }}
+                </div>
+                <div>
+                    Quantity: {{ product.quantity_available }}
+                </div>
+                <div>
+                    Category: {{ product.category.name }}
+                </div>
+                <hr>
+            {% endfor %}
         </div>
 
-    <a href="{% url 'logout' %}">Log Out</a>
+        <a href="{% url 'logout' %}" class="mt-2">
+            <button class="bg-purple-600 text-white p-2">Log out</button>
+        </a>
+    </div>
 
 {% endblock %}

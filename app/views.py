@@ -53,11 +53,6 @@ def add_to_cart(request, product_id):
     
     return HttpResponseRedirect(reverse("view_cart"))
 
-
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from .models import Cart, Order, OrderItem
-
 def view_cart(request):
     if not request.user.is_authenticated:
         return redirect(reverse("login"))
@@ -65,7 +60,6 @@ def view_cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
-        # Create an order from the cart
         order = Order.objects.create(user=request.user)
 
         # Transfer cart items to order items
@@ -77,10 +71,9 @@ def view_cart(request):
             product.quantity_available -= cart_item.quantity
             product.save()
 
-        # Empty the cart after creating the order
         cart.items.all().delete()
 
-        return redirect(reverse("view_order"))  # Redirect to the view_order page or any other page after placing the order
+        return redirect(reverse("view_order")) 
 
     return render(request, "app/cart.html", {"cart": cart})
 

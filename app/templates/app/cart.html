@@ -20,10 +20,15 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Place Order</button>
+        </form>
     {% else %}
         <p>Your cart is empty.</p>
     {% endif %}
 
-    <a href="{% url 'index' %}">Continue Shopping</a>
+    <a href="{% url 'app' %}">Continue Shopping</a>
 
 {% endblock %}

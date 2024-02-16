@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+
+{% block body %}
+
+<h2>Orders</h2>
+
+{% for order in orders %}
+    <h3>{{ order }}</h3>
+    <ul>
+        {% for item in order.orderitems.all %}
+            <li>{{ item.product }} - Quantity: {{ item.quantity }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: {{ order.total_price }}</p>
+    <hr>
+{% endfor %}
+
+<a href="{% url 'app' %}">Continue Shopping</a>
+
+{% endblock %}

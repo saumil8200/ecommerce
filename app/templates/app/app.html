@@ -3,11 +3,20 @@
 {% block body %}
 
     <div class="max-w-6xl mx-auto">
-        <h1>Welcome! {{ request.user.first_name }}</h1>
-        <ul>
+        <a href="{% url 'logout' %}" class="mt-2">
+            <button class="bg-purple-600 text-white p-2">Log out</button>
+        </a>
+
+        <div>
+            <span><a href="{% url 'view_cart' %}">Your Cart</a></span>
+            <span><a href="{% url 'view_order' %}">Your Orders</a></span>
+        </div>
+
+        <h1>Welcome! {{ request.user.username }}</h1>
+        <!-- <ul>
             <li>Username: {{ request.user.username }}</li>
             <li>Email: {{ request.user.email }}</li>
-        </ul>
+        </ul> -->
 
         <div class="p-3 m-3">
             {% for product in products %}
@@ -15,24 +24,13 @@
                     <a href="{% url 'product' product.id %}">
                         {{ product.name }}
                     </a>
-                    - <span>{{ product.description }}</span>
                 </div>
                 <div>
                     Price: {{ product.price }}
                 </div>
-                <div>
-                    Quantity: {{ product.quantity_available }}
-                </div>
-                <div>
-                    Category: {{ product.category.name }}
-                </div>
                 <hr>
             {% endfor %}
         </div>
-
-        <a href="{% url 'logout' %}" class="mt-2">
-            <button class="bg-purple-600 text-white p-2">Log out</button>
-        </a>
     </div>
 
 {% endblock %}

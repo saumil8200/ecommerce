@@ -2,33 +2,66 @@
 
 {% block body %}
 
-    <h1>Your Shopping Cart</h1>
-    
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    {% if cart.items.all %}
-        <ul>
-            {% for item in cart.items.all %}
-                <li>
-                    {{ item.product.name }} - Quantity: {{ item.quantity }}
+    <div>
+
+        <nav>
+            <ul class="flex justify-start py-4 text-sm font-medium uppercase">
+                <li class="px-3 font-black"><a href="{% url 'app' %}">Home</a></li>
+                <li class="px-3"><a href="">Categories</a></li>
+                <li class="px-3"><a href="{% url 'view_cart' %}">Your Cart</a></li>
+                <li class="px-3"><a href="{% url 'view_order' %}">Your Orders</a></li>
+                <li class="px-3">
+                    <a href="{% url 'logout' %}" class="bg-blue-600 text-white p-2 rounded-3xl">Log out</a>
                 </li>
-            {% endfor %}
-        </ul>
+            </ul>
+        </nav>
 
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Place Order</button>
-        </form>
-    {% else %}
-        <p>Your cart is empty.</p>
-    {% endif %}
+        <div class="px-3 pt-3">
+            <h1 class="text-3xl font-black">Your Shopping Cart</h1>
+    
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p class="font-light">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-    <a href="{% url 'app' %}">Continue Shopping</a>
+            <div class="pt-3"> 
+                {% if cart.items.all %}
+                    {% for item in cart.items.all %}
+                        <div class="flex items-center justify-start pb-3">
+                            <div>
+                                <img class="rounded-2xl h-24" src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+                            </div>
+                            <div class="px-3">
+                                <div class="font-bold">{{ item.product.name }}</div>
+                                <div class="text-sm font-light">
+                                    Quantity: {{ item.quantity }}
+                                </div>
+                                <div class="text-sm font-light">
+                                    Total Price: 
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="pb-2">
+                    {% endfor %}
+
+                        <div class="pt-2">
+                            <form method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="bg-blue-600 text-white p-3 text-sm rounded-3xl">Place Order</button>
+                            </form>
+                        </div>
+                    
+                {% else %}
+                    <p>Your cart is empty.</p>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
 
 {% endblock %}

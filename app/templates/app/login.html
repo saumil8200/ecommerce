@@ -3,30 +3,28 @@
 {% block body %}
 
     <div class="grid place-content-center h-screen max-w-sm mx-auto">
-        <div>
-            {% if message %}
-            <div>{{ message }}</div>
-            {% endif %}
-        </div>
-
-        <div>
-            <h1 class="bg-purple-600 text-white p-3">Login</h1>
-            <form action="{% url 'login' %}" method="post">
+        <div class="shadow-md rounded-lg p-12 my-3 bg-white">
+            <h1 class="text-3xl font-black pb-2">Login</h1>
+            <div class="text-sm font-light pb-3">
+                Don't have an account yet? <a href="{% url 'register' %}" class="font-medium underline text-blue-500">Sign Up</a>
+            </div>
+            <form action="{% url 'login' %}" method="post" class="font-light pb-3">
                 {% csrf_token %}
-                <div>
-                    <input type="text" name="username" placeholder="Username" class="bg-white w-full p-2 mt-3">
+                <div class="my-4"> 
+                    <input type="text" name="username" placeholder="Username" class="w-full p-2 border-2 border-neutral-100 rounded-xl">
                 </div>
                 <div>
-                    <input type="password" name="password" placeholder="Password" class="bg-white w-full p-2 mt-3">
+                    <input type="password" name="password" placeholder="Password" class="w-full p-2 border-2 border-neutral-100 rounded-xl">
                 </div>
                 <div>
-                    <input type="submit" value="log in" class="bg-purple-600 p-2 mt-3 text-white">
+                    <input type="submit" value="log in" class="bg-blue-600 min-w-full rounded-xl p-2 mt-3 text-white">
                 </div>
             </form>
-        </div>
-
-        <div>
-            New user? <a href="{% url 'register' %}">Register</a>
+            <div class="text-sm font-light ">
+                {% if message %}
+                <div>{{ message }}</div>
+                {% endif %}
+            </div>
         </div>
     </div>
 

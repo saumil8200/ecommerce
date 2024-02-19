@@ -21,6 +21,11 @@ def product(request, product_id):
         "product": product,
     })
 
+def categories(request):
+    return render(request, "app/categories.html", {
+        "categories": Category.objects.all(),
+    })
+
 def add_to_cart(request, product_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("login"))

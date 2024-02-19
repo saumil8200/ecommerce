@@ -2,19 +2,49 @@
 
 {% block body %}
 
-<h2>Orders</h2>
+    <div>
 
-{% for order in orders %}
-    <h3>{{ order }}</h3> <span>Order ID: {{ order.id }}</span>
-    <ul>
-        {% for item in order.orderitems.all %}
-            <li>{{ item.product }} - Quantity: {{ item.quantity }}</li>
-        {% endfor %}
-    </ul>
-    <p>Total Price: {{ order.total_price }}</p>
-    <hr>
-{% endfor %}
+        <nav>
+            <ul class="flex justify-start py-4 text-sm font-medium uppercase">
+                <li class="px-3 font-black"><a href="{% url 'app' %}">Home</a></li>
+                <li class="px-3"><a href="">Categories</a></li>
+                <li class="px-3"><a href="{% url 'view_cart' %}">Your Cart</a></li>
+                <li class="px-3"><a href="{% url 'view_order' %}">Your Orders</a></li>
+                <li class="px-3">
+                    <a href="{% url 'logout' %}" class="bg-blue-600 text-white p-2 rounded-3xl">Log out</a>
+                </li>
+            </ul>
+        </nav>
 
-<a href="{% url 'app' %}">Continue Shopping</a>
+        <div class="px-3 pt-3">
+            <h1 class="text-3xl font-black">Your Orders</h1>
+            {% if order.items.all %}
+                {% for order in orders %}
+                    <div class="pt-3 pb-2">
+                        <div class="px-3 text-sm">
+                            Order ID : {{ order.id }}
+                        </div>
+                        {% for item in order.orderitems.all %}
+                            <div class="px-3 pt-3">
+                                <div class="font-bold">- {{ item.product.name }} - <span class="font-light">{{ item.product.price }}</span></div>
+                                <div class="text-sm font-light px-6">
+                                    Quantity: {{ item.quantity }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                            <div class="px-3">
+                                <div class="font-light pt-6">
+                                    Total Price: <span class="font-bold">{{ order.total_price }}</span>
+                                </div>
+                            </div>
+                    </div>
+                    <hr class="pb-2">
+                {% endfor %}
+            {% else %}
+                <p class="pt-3 font-light">You have zero orders.</p>
+            {% endif %}
+        </div>
+
+    </div>
 
 {% endblock %}

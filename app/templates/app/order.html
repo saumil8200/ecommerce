@@ -18,17 +18,22 @@
 
         <div class="px-3 pt-3">
             <h1 class="text-3xl font-black">Your Orders</h1>
-            {% if order.items.all %}
+            
                 {% for order in orders %}
                     <div class="pt-3 pb-2">
                         <div class="px-3 text-sm">
                             Order ID : {{ order.id }}
                         </div>
                         {% for item in order.orderitems.all %}
-                            <div class="px-3 pt-3">
-                                <div class="font-bold">- {{ item.product.name }} - <span class="font-light">{{ item.product.price }}</span></div>
-                                <div class="text-sm font-light px-6">
-                                    Quantity: {{ item.quantity }}
+                            <div class="px-3 pt-3 flex items-center">
+                                <div>
+                                    <img class="rounded-2xl h-24" src="{{ item.product.image }}">
+                                </div>
+                                <div class="p-3">
+                                    <div class="font-bold">{{ item.product.name }} - <span class="font-light">{{ item.product.price }}</span></div>
+                                    <div class="text-sm font-light">
+                                        Quantity: {{ item.quantity }}
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -40,9 +45,7 @@
                     </div>
                     <hr class="pb-2">
                 {% endfor %}
-            {% else %}
-                <p class="pt-3 font-light">You have zero orders.</p>
-            {% endif %}
+            
         </div>
 
     </div>

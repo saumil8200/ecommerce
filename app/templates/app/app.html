@@ -18,6 +18,13 @@
             </div>
         </nav>
 
+        <form class="pb-4 text-sm" action="{% url 'search' %}" method="GET">
+            <div class="flex">
+                <input type="text" class="min-w-full p-3 rounded-3xl border-2 border-gray-100 focus:outline-none"name="q" placeholder="Search">
+                <input type="submit" value="">
+            </div>
+        </form>      
+        
         <div class="pb-4 px-3">
             <h1>Welcome! <span class="font-black">{{ request.user.first_name }} {{ request.user.last_name }}</span></h1>
         </div>

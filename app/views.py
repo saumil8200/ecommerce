@@ -125,3 +125,14 @@ def logout_view(request):
     return render(request, "app/login.html", {
         "message": "Logged out."
     })
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        products = Product.objects.filter(name__icontains=query)
+    else:
+        products = Product.objects.all()
+    return render(request, "app/search.html", {
+        "products": products,
+        "query": query,
+    })

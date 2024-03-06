@@ -1,0 +1,51 @@
+{% extends "app/layout.html" %}
+
+{% block body %}
+    <div>
+
+        <nav>
+            <div class="flex justify-between py-4 text-sm font-medium uppercase">
+                <div class="flex justify-start">
+                    <div class="px-3 font-black"><a href="{% url 'app' %}">Home</a></div>
+                    <div class="px-3"><a href="{% url 'categories' %}">Categories</a></div>
+                    <div class="px-3"><a href="{% url 'view_cart' %}">Your Cart</a></div>
+                    <div class="px-3"><a href="{% url 'view_order' %}">Your Orders</a></div>
+                </div>
+                <div class="px-3">
+                    <a href="{% url 'logout' %}" class="bg-blue-600 text-white text-xs p-2 rounded-3xl">Log out</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="px-3 pt-3">
+            <h1 class="text-3xl font-black pb-3">Search Results</h1>
+    
+            {% if query %}
+                <p class="text-sm pb-3">Your search for <span class="font-bold">"{{ query }}"</span> returned the following results:</p>
+            {% else %}
+                <p class="text-sm pb-3">No search query provided.</p>
+            {% endif %}
+        
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-3">
+                {% for product in products %}
+                    <div>
+                        <a href="{% url 'product' product.id %}">
+                            <div>
+                                <!-- <img class="object-cover rounded-2xl" src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"> -->
+                                <img class="object-cover rounded-2xl" src="{{ product.image }}">
+                            </div>
+                            <div class="font-medium pt-2"> 
+                                {{ product.name }}
+                            </div>
+                            <div class="text-sm font-light">
+                                {{ product.price }}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
